@@ -41,7 +41,6 @@ sub get {
 
     my $ua       = $self->ua;
     my $response = $ua->request('GET', $url);
-    print STDERR Dumper($response), "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\n";
     my @caller   = caller(1);
     @caller = caller(2) if $caller[3] eq '(eval)';
 
