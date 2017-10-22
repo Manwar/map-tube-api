@@ -39,11 +39,9 @@ sub shortest_route {
     my ($self, $map, $start, $end) = @_;
 
     my $url      = sprintf("%s/shortest-route", $BASE_URL);
-    my $headers  = { 'Content-Type' => 'application/json' };
-    my $content  = to_json({ map => $map, start => $start, end => $end });
-    my $response = $self->post($url, $headers, $content);
+    my $response = $self->post($url, { map => $map, start => $start, end => $end });
 
-    return from_json($response->{content});
+    return from_json($response->decoded_content);
 }
 
 =head2 line_stations($map, $line)
@@ -56,7 +54,7 @@ sub line_stations {
     my $url      = sprintf("%s/stations/%s/%s", $BASE_URL, $map, $line);
     my $response = $self->get($url);
 
-    return from_json($response->{content});
+    return from_json($response->decoded_content);
 }
 
 =head2 map_stations($map)
@@ -69,7 +67,7 @@ sub map_stations {
     my $url      = sprintf("%s/stations/%s", $BASE_URL, $map);
     my $response = $self->get($url);
 
-    return from_json($response->{content});
+    return from_json($response->decoded_content);
 }
 
 =head2 available_maps()
@@ -77,12 +75,12 @@ sub map_stations {
 =cut
 
 sub available_maps {
-   my ($self) = @_;
+    my ($self) = @_;
 
     my $url      = sprintf("%s/maps", $BASE_URL);
     my $response = $self->get($url);
 
-    return from_json($response->{content});
+    return from_json($response->decoded_content);
 }
 
 =head1 AUTHOR

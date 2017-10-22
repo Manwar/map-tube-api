@@ -16,12 +16,14 @@ Version 0.01
 use 5.006;
 use Data::Dumper;
 
-use HTTP::Tiny;
+use LWP::UserAgent;
+use HTTP::Request::Common qw(GET POST);
 use Map::Tube::API::Exception;
+
 use Moo;
 use namespace::clean;
 
-has 'ua' => ( is => 'rw', default => sub { HTTP::Tiny->new(agent => "Map-Tube-API/v1"); } );
+has 'ua' => ( is => 'rw', default => sub { LWP::UserAgent->new } );
 
 =head1 DESCRIPTION
 
@@ -32,23 +34,23 @@ It provides common useragent library for Map::Tube::API services.
 =head2 get($url)
 
 It  expects  one parameter i.e.  URL  and returns the standard response. On error
-throws exception of type L<Map::Tube::API::UserAgent::Exception>.
+throws exception of type L<Map::Tube::API::Exception>.
 
 =cut
 
 sub get {
     my ($self, $url) = @_;
 
-    my $ua       = $self->ua;
-    my $response = $ua->request('GET', $url);
-    my @caller   = caller(1);
-    @caller = caller(2) if $caller[3] eq '(eval)';
+    my $response = $self->ua->request(GET($url));
 
-    unless ($response->{success}) {
+    unless ($response->is_success) {
+        my @caller = caller(1);
+        @caller    = caller(2) if $caller[3] eq '(eval)';
+
 	Map::Tube::API::Exception->throw({
             method      => $caller[3],
-            code        => $response->{status},
-            message     => $response->{reason},
+            code        => $response->code,
+            message     => $response->message,
             filename    => $caller[1],
             line_number => $caller[2] });
     }
@@ -56,27 +58,26 @@ sub get {
     return $response;
 }
 
-=head2 post($url, \%headers, $content)
+=head2 post($url, $content)
 
-It expects  three  parameters i.e. URL, Headers and Content in the same order and
-returns the standard response. The c<$content> should be JSON formatted. On error
-throws exception of type L<Map::Tube::API::UserAgent::Exception>.
+It expects two parameters  i.e. URL and Content in the same order and returns the
+standard response.On error throws exception of type L<Map::Tube::API::Exception>.
 
 =cut
 
 sub post {
-    my ($self, $url, $headers, $content) = @_;
+     my ($self, $url, $content) = @_;
 
-    my $ua       = $self->ua;
-    my $response = $ua->request('POST', $url, { headers => $headers, content => $content });
-    my @caller   = caller(1);
-    @caller = caller(2) if $caller[3] eq '(eval)';
+    my $response = $self->ua->request(POST($url, $content));
 
-    unless ($response->{success}) {
+    unless ($response->is_success) {
+        my @caller = caller(1);
+        @caller    = caller(2) if $caller[3] eq '(eval)';
+
         Map::Tube::API::Exception->throw({
             method      => $caller[3],
-            code        => $response->{status},
-            message     => $response->{reason},
+            code        => $response->code,
+            message     => $response->message,
             filename    => $caller[1],
             line_number => $caller[2] });
     }
