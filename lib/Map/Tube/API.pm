@@ -33,9 +33,13 @@ has 'version' => (is => 'rw', default => sub { $DEFAULT_VERSION });
 
 =head1 CONSTRUCTOR
 
+Optionally you can provide host of REST API and also the version.
+
 =head1 METHODS
 
 =head2 shortest_route($map, $start, $stop)
+
+Returns list of stations for the shortest route between C<$start> and C<$end>.
 
 =cut
 
@@ -50,6 +54,8 @@ sub shortest_route {
 
 =head2 line_stations($map, $line)
 
+Returns list of stations in the line C<$line> for C<$map>.
+
 =cut
 
 sub line_stations {
@@ -63,6 +69,8 @@ sub line_stations {
 
 =head2 map_stations($map)
 
+Returns list of stations for the given map C<$map>.
+
 =cut
 
 sub map_stations {
@@ -75,6 +83,8 @@ sub map_stations {
 }
 
 =head2 available_maps()
+
+Returns list of available maps.
 
 =cut
 
