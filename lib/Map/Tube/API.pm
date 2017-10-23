@@ -23,7 +23,11 @@ use Moo;
 use namespace::clean;
 extends 'Map::Tube::API::UserAgent';
 
-our $BASE_URL = 'http://manwar.mooo.info/map-tube/v1';
+our $DEFAULT_HOST    = 'manwar.mooo.info';
+our $DEFAULT_VERSION = 'v1';
+
+has 'host'    => (is => 'rw', default => sub { $DEFAULT_HOST    });
+has 'version' => (is => 'rw', default => sub { $DEFAULT_VERSION });
 
 =head1 DESCRIPTION
 
@@ -38,7 +42,7 @@ our $BASE_URL = 'http://manwar.mooo.info/map-tube/v1';
 sub shortest_route {
     my ($self, $map, $start, $end) = @_;
 
-    my $url      = sprintf("%s/shortest-route", $BASE_URL);
+    my $url      = sprintf("%s/shortest-route", $self->_base_url);
     my $response = $self->post($url, { map => $map, start => $start, end => $end });
 
     return from_json($response->decoded_content);
@@ -51,7 +55,7 @@ sub shortest_route {
 sub line_stations {
     my ($self, $map, $line) = @_;
 
-    my $url      = sprintf("%s/stations/%s/%s", $BASE_URL, $map, $line);
+    my $url      = sprintf("%s/stations/%s/%s", $self->_base_url, $map, $line);
     my $response = $self->get($url);
 
     return from_json($response->decoded_content);
@@ -64,7 +68,7 @@ sub line_stations {
 sub map_stations {
     my ($self, $map) = @_;
 
-    my $url      = sprintf("%s/stations/%s", $BASE_URL, $map);
+    my $url      = sprintf("%s/stations/%s", $self->_base_url, $map);
     my $response = $self->get($url);
 
     return from_json($response->decoded_content);
@@ -77,10 +81,20 @@ sub map_stations {
 sub available_maps {
     my ($self) = @_;
 
-    my $url      = sprintf("%s/maps", $BASE_URL);
+    my $url      = sprintf("%s/maps", $self->_base_url);
     my $response = $self->get($url);
 
     return from_json($response->decoded_content);
+}
+
+#
+#
+# PRIVATE METHODS
+
+sub _base_url {
+    my ($self) = @_;
+
+    return sprintf("http://%s/map-tube/%s", $self->host, $self->version);
 }
 
 =head1 AUTHOR

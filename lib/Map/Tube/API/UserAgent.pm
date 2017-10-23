@@ -23,7 +23,7 @@ use Map::Tube::API::Exception;
 use Moo;
 use namespace::clean;
 
-has 'ua' => ( is => 'rw', default => sub { LWP::UserAgent->new } );
+has 'ua' => (is => 'rw', default => sub { LWP::UserAgent->new });
 
 =head1 DESCRIPTION
 
