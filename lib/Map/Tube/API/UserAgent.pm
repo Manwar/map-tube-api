@@ -50,7 +50,7 @@ sub get {
 	Map::Tube::API::Exception->throw({
             method      => $caller[3],
             code        => $response->code,
-            message     => $response->message,
+            message     => $response->content,
             filename    => $caller[1],
             line_number => $caller[2] });
     }
@@ -77,7 +77,7 @@ sub post {
         Map::Tube::API::Exception->throw({
             method      => $caller[3],
             code        => $response->code,
-            message     => $response->message,
+            message     => $response->content,
             filename    => $caller[1],
             line_number => $caller[2] });
     }
