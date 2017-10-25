@@ -37,29 +37,64 @@ Optionally you can provide host of REST API and also the version.
 
 =head1 METHODS
 
-=head2 shortest_route($map, $start, $stop)
+=head2 shortest_route(\%params)
 
-Returns list of stations for the shortest route between C<$start> and C<$end>.
+Returns list of stations for the shortest route.The parameters should be as below
+
+    +-------+-------------------------------------------------------------------+
+    | Key   | Description                                                       |
+    +-------+-------------------------------------------------------------------+
+    | map   | A valid map name.                                                 |
+    | start | A valid start station name in the given map.                       |
+    | stop  | A valid end station name in the give map.                          |
+    +-------+-------------------------------------------------------------------+
 
 =cut
 
 sub shortest_route {
-    my ($self, $map, $start, $end) = @_;
+    my ($self, $params) = @_;
+
+    my $map = $params->{map};
+    die "ERROR: Missing map name."
+        unless (defined $map && ($map !~ /^$/));
+
+    my $start = $params->{start};
+    die "ERROR: Missing start station name."
+        unless (defined $start && ($start !~ /^$/));
+
+    my $end = $params->{start};
+    die "ERROR: Missing end station name."
+        unless (defined $end && ($end !~ /^$/));
 
     my $url      = sprintf("%s/shortest-route", $self->_base_url);
-    my $response = $self->post($url, { map => $map, start => $start, end => $end });
+    my $response = $self->post($url, $params);
 
     return from_json($response->decoded_content);
 }
 
-=head2 line_stations($map, $line)
+=head2 line_stations(\%params)
 
-Returns list of stations in the line C<$line> for C<$map>.
+Returns list of stations. The parameters should be as below:
+
+    +-------+-------------------------------------------------------------------+
+    | Key   | Description                                                       |
+    +-------+-------------------------------------------------------------------+
+    | map   | A valid map name.                                                 |
+    | line  | A valid line name in the given map.                               |
+    +-------+-------------------------------------------------------------------+
 
 =cut
 
 sub line_stations {
-    my ($self, $map, $line) = @_;
+    my ($self, $params) = @_;
+
+    my $map = $params->{map};
+    die "ERROR: Missing map name."
+        unless (defined $map && ($map !~ /^$/));
+
+    my $line = $params->{line};
+    die "ERROR: Missing line name."
+        unless (defined $line && ($line !~ /^$/));
 
     my $url      = sprintf("%s/stations/%s/%s", $self->_base_url, $map, $line);
     my $response = $self->get($url);
@@ -67,14 +102,24 @@ sub line_stations {
     return from_json($response->decoded_content);
 }
 
-=head2 map_stations($map)
+=head2 map_stations(\%params)
 
-Returns list of stations for the given map C<$map>.
+Returns list of stations for the given map.
+
+    +-------+-------------------------------------------------------------------+
+    | Key   | Description                                                       |
+    +-------+-------------------------------------------------------------------+
+    | map   | A valid map name.                                                 |
+    +-------+-------------------------------------------------------------------+
 
 =cut
 
 sub map_stations {
-    my ($self, $map) = @_;
+    my ($self, $params) = @_;
+
+    my $map = $params->{map};
+    die "ERROR: Missing map name."
+        unless (defined $map && ($map !~ /^$/));
 
     my $url      = sprintf("%s/stations/%s", $self->_base_url, $map);
     my $response = $self->get($url);

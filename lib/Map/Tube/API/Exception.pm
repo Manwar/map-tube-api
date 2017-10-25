@@ -20,18 +20,13 @@ with 'Throwable';
 
 use overload q{""} => 'as_string', fallback => 1;
 
-has method      => (is => 'ro');
-has message     => (is => 'ro');
-has code        => (is => 'ro');
-has filename    => (is => 'ro');
-has line_number => (is => 'ro');
+has code    => (is => 'ro', required => 1);
+has message => (is => 'ro', required => 1);
 
 sub as_string {
     my ($self) = @_;
 
-    return sprintf("%s(): %s (status: %s) file %s on line %d\n",
-                   $self->method, $self->message, $self->code,
-                   $self->filename, $self->line_number);
+    return sprintf("ERROR: %s (status: %s)\n", $self->message, $self->code);
 }
 
 =head1 DESCRIPTION

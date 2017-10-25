@@ -44,15 +44,8 @@ sub get {
     my $response = $self->ua->request(GET($url));
 
     unless ($response->is_success) {
-        my @caller = caller(1);
-        @caller    = caller(2) if $caller[3] eq '(eval)';
-
-	Map::Tube::API::Exception->throw({
-            method      => $caller[3],
-            code        => $response->code,
-            message     => $response->content,
-            filename    => $caller[1],
-            line_number => $caller[2] });
+        Map::Tube::API::Exception->throw(
+            { code => $response->code, message => $response->content });
     }
 
     return $response;
@@ -71,15 +64,8 @@ sub post {
     my $response = $self->ua->request(POST($url, $content));
 
     unless ($response->is_success) {
-        my @caller = caller(1);
-        @caller    = caller(2) if $caller[3] eq '(eval)';
-
-        Map::Tube::API::Exception->throw({
-            method      => $caller[3],
-            code        => $response->code,
-            message     => $response->content,
-            filename    => $caller[1],
-            line_number => $caller[2] });
+        Map::Tube::API::Exception->throw(
+            { code => $response->code, message => $response->content });
     }
 
     return $response;
