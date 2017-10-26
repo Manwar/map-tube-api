@@ -62,12 +62,12 @@ sub shortest_route {
     die "ERROR: Missing start station name."
         unless (defined $start && ($start !~ /^$/));
 
-    my $end = $params->{start};
+    my $end = $params->{end};
     die "ERROR: Missing end station name."
         unless (defined $end && ($end !~ /^$/));
 
-    my $url      = sprintf("%s/shortest-route", $self->_base_url);
-    my $response = $self->post($url, $params);
+    my $url      = sprintf("%s/shortest-route/%s/%s/%s", $self->_base_url, $map, $start, $end);
+    my $response = $self->get($url);
 
     return from_json($response->decoded_content);
 }
