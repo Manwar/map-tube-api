@@ -69,7 +69,7 @@ sub shortest_route {
     my $url      = sprintf("%s/shortest-route/%s/%s/%s", $self->_base_url, $map, $start, $end);
     my $response = $self->get($url);
 
-    return from_json($response->decoded_content);
+    return JSON->new->allow_nonref->utf8(1)->decode($response->decoded_content);
 }
 
 =head2 line_stations(\%params)
@@ -99,7 +99,7 @@ sub line_stations {
     my $url      = sprintf("%s/stations/%s/%s", $self->_base_url, $map, $line);
     my $response = $self->get($url);
 
-    return from_json($response->decoded_content);
+    return JSON->new->allow_nonref->utf8(1)->decode($response->decoded_content);
 }
 
 =head2 map_stations(\%params)
@@ -124,7 +124,7 @@ sub map_stations {
     my $url      = sprintf("%s/stations/%s", $self->_base_url, $map);
     my $response = $self->get($url);
 
-    return from_json($response->decoded_content);
+    return JSON->new->allow_nonref->utf8(1)->decode($response->decoded_content);
 }
 
 =head2 available_maps()
@@ -139,7 +139,7 @@ sub available_maps {
     my $url      = sprintf("%s/maps", $self->_base_url);
     my $response = $self->get($url);
 
-    return from_json($response->decoded_content);
+    return JSON->new->allow_nonref->utf8(1)->decode($response->decoded_content);
 }
 
 #
