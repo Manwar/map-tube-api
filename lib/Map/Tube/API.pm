@@ -20,7 +20,7 @@ use Data::Dumper;
 use Map::Tube::API::UserAgent;
 
 use Moo;
-use namespace::clean;
+use namespace::autoclean;
 extends 'Map::Tube::API::UserAgent';
 
 our $DEFAULT_HOST    = 'manwar.mooo.info';

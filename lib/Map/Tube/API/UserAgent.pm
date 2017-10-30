@@ -21,7 +21,7 @@ use HTTP::Request::Common qw(GET POST);
 use Map::Tube::API::Exception;
 
 use Moo;
-use namespace::clean;
+use namespace::autoclean;
 
 has 'ua' => (is => 'rw', default => sub { LWP::UserAgent->new });
 

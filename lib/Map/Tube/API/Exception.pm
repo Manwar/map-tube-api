@@ -15,7 +15,7 @@ Version 0.01
 
 use 5.006;
 use Moo;
-use namespace::clean;
+use namespace::autoclean;
 with 'Throwable';
 
 use overload q{""} => 'as_string', fallback => 1;
