@@ -35,6 +35,74 @@ has 'version' => (is => 'rw', default => sub { $DEFAULT_VERSION });
 
 Optionally you can provide host of REST API and also the version.
 
+=head1 MAP NAMES
+
+=over 2
+
+=item Barcelona
+
+=item Beijing
+
+=item Berlin
+
+=item Bucharest
+
+=item Budapest
+
+=item Delhi
+
+=item Dnipropetrovsk
+
+=item Glasgow
+
+=item Kazan
+
+=item Kharkiv
+
+=item Kiev
+
+=item KoelnBonn
+
+=item Kolkatta
+
+=item KualaLumpur
+
+=item London
+
+=item Lyon
+
+=item Malaga
+
+=item Minsk
+
+=item Moscow
+
+=item Nanjing
+
+=item NizhnyNovgorod
+
+=item Novosibirsk
+
+=item Prague
+
+=item SaintPetersburg
+
+=item Samara
+
+=item Singapore
+
+=item Sofia
+
+=item Tbilisi
+
+=item Vienna
+
+=item Warsaw
+
+=item Yekaterinburg
+
+=back
+
 =head1 METHODS
 
 =head2 shortest_route(\%params)
