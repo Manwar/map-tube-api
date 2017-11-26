@@ -22,6 +22,8 @@ WriteMakefile(
         'Moo'                  => '2.000000',
         'namespace::autoclean' => '0.28',
         'JSON'                 => '2.53',
+        'Throwable'            => '0.200011',
+        'LWP::UserAgent'       => 0,
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Map-Tube-API-*' },
