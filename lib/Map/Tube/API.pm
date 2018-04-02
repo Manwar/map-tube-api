@@ -114,7 +114,7 @@ Returns list of stations for the shortest route.The parameters should be as belo
     +-------+-------------------------------------------------------------------+
     | map   | A valid map name.                                                 |
     | start | A valid start station name in the given map.                       |
-    | stop  | A valid end station name in the give map.                          |
+    | end   | A valid end station name in the give map.                          |
     +-------+-------------------------------------------------------------------+
 
 =cut
@@ -265,7 +265,7 @@ L<http://search.cpan.org/dist/Map-Tube-API/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (C) 2017 Mohammad S Anwar.
+Copyright (C) 2018 Mohammad S Anwar.
 
 This  program  is  free software; you can redistribute it and/or modify it under
 the  terms  of the the Artistic License (2.0). You may obtain a copy of the full
