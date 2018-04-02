@@ -1,6 +1,6 @@
 package Map::Tube::API;
 
-$Map::Tube::API::VERSION   = '0.01';
+$Map::Tube::API::VERSION   = '0.04';
 $Map::Tube::API::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::API - Interface to Map::Tube REST API.
 
 =head1 VERSION
 
-Version 0.01
+Version 0.04
 
 =cut
 
@@ -31,9 +31,7 @@ has 'version' => (is => 'rw', default => sub { $DEFAULT_VERSION });
 
 =head1 DESCRIPTION
 
-=head1 CONSTRUCTOR
-
-Optionally you can provide host of REST API and also the version.
+Map::Tube REST API is still in beta. No API key is required at the moment.
 
 =head1 MAP NAMES
 
@@ -103,6 +101,16 @@ Optionally you can provide host of REST API and also the version.
 
 =back
 
+=head1 CONSTRUCTOR
+
+Optionally you can provide C<host> of REST API and also  the C<version>. Default
+version is C<v1>.
+
+    use strict; use warnings;
+    use Map::Tube::API;
+
+    my $api = Map::Tube::API->new;
+
 =head1 METHODS
 
 =head2 shortest_route(\%params)
@@ -113,9 +121,15 @@ Returns list of stations for the shortest route.The parameters should be as belo
     | Key   | Description                                                       |
     +-------+-------------------------------------------------------------------+
     | map   | A valid map name.                                                 |
-    | start | A valid start station name in the given map.                       |
-    | end   | A valid end station name in the give map.                          |
+    | start | A valid start station name in the given map.                      |
+    | end   | A valid end station name in the give map.                         |
     +-------+-------------------------------------------------------------------+
+
+    use strict; use warnings;
+    use Map::Tube::API;
+
+    my $api   = Map::Tube::API->new;
+    my $route = $api->shortest_route({ map => 'london', start => 'Baker Street', end => 'Wembley Park' });
 
 =cut
 
@@ -151,6 +165,12 @@ Returns list of stations. The parameters should be as below:
     | line  | A valid line name in the given map.                               |
     +-------+-------------------------------------------------------------------+
 
+    use strict; use warnings;
+    use Map::Tube::API;
+
+    my $api      = Map::Tube::API->new;
+    my $stations = $api->line_stations({ map => 'london', line => 'Metropolitan' });
+
 =cut
 
 sub line_stations {
@@ -180,6 +200,12 @@ Returns list of stations for the given map.
     | map   | A valid map name.                                                 |
     +-------+-------------------------------------------------------------------+
 
+    use strict; use warnings;
+    use Map::Tube::API;
+
+    my $api      = Map::Tube::API->new;
+    my $stations = $api->map_stations({ map => 'london' });
+
 =cut
 
 sub map_stations {
@@ -198,6 +224,12 @@ sub map_stations {
 =head2 available_maps()
 
 Returns list of available maps.
+
+    use strict; use warnings;
+    use Map::Tube::API;
+
+    my $api  = Map::Tube::API->new;
+    my $maps = $api->available_maps({ map => 'london' });
 
 =cut
 
@@ -265,7 +297,7 @@ L<http://search.cpan.org/dist/Map-Tube-API/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (C) 2018 Mohammad S Anwar.
+Copyright (C) 2017 Mohammad S Anwar.
 
 This  program  is  free software; you can redistribute it and/or modify it under
 the  terms  of the the Artistic License (2.0). You may obtain a copy of the full

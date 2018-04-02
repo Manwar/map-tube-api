@@ -1,6 +1,6 @@
 package Map::Tube::API::UserAgent;
 
-$Map::Tube::API::UserAgent::VERSION   = '0.01';
+$Map::Tube::API::UserAgent::VERSION   = '0.04';
 $Map::Tube::API::UserAgent::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::API::UserAgent - Low-level HTTP request handler for Map::Tube::API.
 
 =head1 VERSION
 
-Version 0.01
+Version 0.04
 
 =cut
 
@@ -116,7 +116,7 @@ L<http://search.cpan.org/dist/Map-Tube-API/>
 
 =head1 LICENSE AND COPYRIGHT
 
-Copyright (C) 2018 Mohammad S Anwar.
+Copyright (C) 2017 Mohammad S Anwar.
 
 This  program  is  free software;  you can redistribute it and/or modify it under
 the  terms  of the the Artistic  License (2.0). You may obtain a copy of the full

@@ -22,11 +22,18 @@ WriteMakefile(
         'Moo'                  => '2.000000',
         'namespace::autoclean' => '0.28',
         'JSON'                 => '2.53',
+        'Throwable'            => '0.200011',
+        'LWP::UserAgent'       => 0,
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean => { FILES => 'Map-Tube-API-*' },
     (eval { ExtUtils::MakeMaker->VERSION(6.46) } ? (META_MERGE => {
         'meta-spec' => { version => 2 },
+        provides    => {
+            'Map::Tube::API'            => { file => 'lib/Map/Tube/API.pm'          , version => '0.03' },
+            'Map::Tube::API::UserAgent' => { file => 'lib/Map/Tube/API/UserAgent.pm', version => '0.03' },
+            'Map::Tube::API::Exception' => { file => 'lib/Map/Tube/API/Exception.pm', version => '0.03' },
+        },
         resources => {
             repository => {
                 type => 'git',
