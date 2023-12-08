@@ -1,5 +1,7 @@
 Revision history for Map::Tube::API
 
+      - Added Map::Tube::Bielefeld.
+
 0.05  Wed Apr 18 21:45:00 2018
       - Fixed mismatch version issue.
 

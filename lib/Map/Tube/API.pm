@@ -43,6 +43,8 @@ Map::Tube REST API is still in beta. No API key is required at the moment.
 
 =item Berlin
 
+=item Bielefeld
+
 =item Bucharest
 
 =item Budapest
