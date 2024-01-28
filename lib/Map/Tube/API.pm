@@ -1,6 +1,6 @@
 package Map::Tube::API;
 
-$Map::Tube::API::VERSION   = '0.06';
+$Map::Tube::API::VERSION   = '0.07';
 $Map::Tube::API::AUTHORITY = 'cpan:MANWAR';
 
 =head1 NAME
@@ -9,7 +9,7 @@ Map::Tube::API - Interface to Map::Tube REST API.
 
 =head1 VERSION
 
-Version 0.06
+Version 0.07
 
 =cut
 
@@ -39,6 +39,8 @@ Map::Tube REST API is still in beta. No API key is required at the moment.
 =item Beijing
 
 =item Berlin
+
+=item Bielefeld
 
 =item Bucharest
 
